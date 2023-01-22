@@ -96,7 +96,6 @@ int *MedianOfThree(int * a, int * b, int * c)
 // A Utility function to perform intro sort
 void IntrosortUtil(int arr[], int * begin, int * end, int depthLimit)
 {
-    // Count the number of elements
     int size = end - begin;
 
     if (size < 16)
