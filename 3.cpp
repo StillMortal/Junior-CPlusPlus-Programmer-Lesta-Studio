@@ -26,29 +26,29 @@
 
 using namespace std;
 
-void swapValue(int *a, int *b)
+void swapValue(int* a, int* b)
 {
-    int *temp = a;
+    int* temp = a;
     a = b;
     b = temp;
 }
 
-void InsertionSort(int arr[], int *begin, int *end)
+void InsertionSort(int arr[], int* begin, int* end)
 {
     int left = begin - arr;
     int right = end - arr;
 
-    for (int i = left+1; i <= right; i++)
+    for (int i = left + 1; i <= right; i++)
     {
         int key = arr[i];
-        int j = i-1;
+        int j = i - 1;
 
         while (j >= left && arr[j] > key)
         {
-            arr[j+1] = arr[j];
-            j = j-1;
+            arr[j + 1] = arr[j];
+            j = j - 1;
         }
-        arr[j+1] = key;
+        arr[j + 1] = key;
     }
 }
 
@@ -72,7 +72,7 @@ int* Partition(int arr[], int low, int high)
     return (arr + i + 1);
 }
 
-int *MedianOfThree(int * a, int * b, int * c)
+int* MedianOfThree(int* a, int* b, int* c)
 {
     if (*a < *b && *b < *c)
         return (b);
@@ -94,7 +94,7 @@ int *MedianOfThree(int * a, int * b, int * c)
 }
 
 // A Utility function to perform intro sort
-void IntrosortUtil(int arr[], int * begin, int * end, int depthLimit)
+void IntrosortUtil(int arr[], int* begin, int* end, int depthLimit)
 {
     int size = end - begin;
 
@@ -106,23 +106,23 @@ void IntrosortUtil(int arr[], int * begin, int * end, int depthLimit)
 
     if (depthLimit == 0)
     {
-        make_heap(begin, end+1);
-        sort_heap(begin, end+1);
+        make_heap(begin, end + 1);
+        sort_heap(begin, end + 1);
         return;
     }
 
-    int * pivot = MedianOfThree(begin, begin+size/2, end);
+    int* pivot = MedianOfThree(begin, begin + size / 2, end);
 
     swapValue(pivot, end);
 
-    int * partitionPoint = Partition(arr, begin-arr, end-arr);
-    IntrosortUtil(arr, begin, partitionPoint-1, depthLimit - 1);
+    int* partitionPoint = Partition(arr, begin - arr, end - arr);
+    IntrosortUtil(arr, begin, partitionPoint - 1, depthLimit - 1);
     IntrosortUtil(arr, partitionPoint + 1, end, depthLimit - 1);
 }
 
-void Introsort(int arr[], int *begin, int *end)
+void Introsort(int arr[], int* begin, int* end)
 {
-    int depthLimit = 2 * log(end-begin);
+    int depthLimit = 2 * log(end - begin);
 
     IntrosortUtil(arr, begin, end, depthLimit);
 }
